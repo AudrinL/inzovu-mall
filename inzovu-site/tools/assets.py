@@ -55,10 +55,33 @@ def sky_cutout(path):
     fg = np.dstack([a, (1 - m) * 255]).astype(np.uint8)
     return im, Image.fromarray(fg, "RGBA")
 
+def sky_cutout_flood(path, tol=6):
+    """Flood-fill the sky from the top edge (works for pale/neutral skies where chroma keying fails)."""
+    import cv2
+    im = Image.open(path).convert("RGB")
+    a = np.asarray(im)
+    sm = cv2.bilateralFilter(a, 9, 40, 9)
+    h, w = sm.shape[:2]
+    mask = np.zeros((h + 2, w + 2), np.uint8)
+    flags = 4 | (255 << 8) | cv2.FLOODFILL_MASK_ONLY
+    for x in range(0, w, 8):
+        if mask[1, x + 1] == 0:
+            cv2.floodFill(sm.copy(), mask, (x, 0), 0, (tol,) * 3, (tol,) * 3, flags)
+    m = mask[1:-1, 1:-1].astype(np.float32) / 255
+    # kill thin leaks into facades (balcony slots), then keep only the region connected to the top edge
+    m8 = cv2.morphologyEx((m * 255).astype(np.uint8), cv2.MORPH_OPEN, np.ones((13, 13), np.uint8))
+    n, lab = cv2.connectedComponents(m8)
+    keep = set(np.unique(lab[0, :])) - {0}
+    m = np.isin(lab, list(keep)).astype(np.float32)
+    m = cv2.GaussianBlur(m, (0, 0), 1.0)
+    fg = np.dstack([a, ((1 - m) * 255).astype(np.uint8)])
+    return im, Image.fromarray(fg, "RGBA")
+
 def run_images():
     # hero cut-outs: projet10 (wide, signage, low angle) and p3 (hotel tower, tall crop)
     for src, name in {"projet10": "hero", "p3": "hero-tall", "projet4": "hero-alt"}.items():
-        bg, fg = sky_cutout(os.path.join(SRC, "images", src + ".jpg"))
+        fn = sky_cutout_flood if src == "projet4" else sky_cutout
+        bg, fg = fn(os.path.join(SRC, "images", src + ".jpg"))
         dusk(bg, 1.0).save(os.path.join(IMG, f"{name}-bg.webp"), "WEBP", quality=86)
         fgd = dusk(fg.convert("RGB"), 1.0)
         Image.merge("RGBA", (*fgd.split(), fg.split()[3])).save(os.path.join(IMG, f"{name}-fg.webp"), "WEBP", quality=86)

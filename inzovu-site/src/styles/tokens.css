@@ -1,0 +1,49 @@
+/* ─────────────────────────────────────────────────────────────
+   Inzovu Mall — design tokens
+   Ground: warm sand. Ink: near-black. One metal: gold.
+   Green is reserved for the ribbon & EDGE story. Cyan is gone.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --sand: #f3eee6;
+  --sand-2: #e9e2d6;
+  --ink: #141311;
+  --ink-2: #2a2825;
+  --stone: #8c857a;
+  --stone-2: #b8b0a3;
+  --gold: #a78e5f;
+  --gold-2: #c9ae7a;
+  --amber: #e9a96a;
+  --green: #90c583;
+  --dusk: #171820;
+  --dusk-2: #232431;
+  --white: #fbf9f5;
+
+  --bg: var(--sand);
+  --fg: var(--ink);
+  --muted: var(--stone);
+  --line: rgba(20, 19, 17, 0.14);
+
+  --font-display: "Archivo", "General Sans", system-ui, sans-serif;
+  --font-body: "General Sans", "Archivo", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --dur: 0.9s;
+
+  --gutter: clamp(20px, 4vw, 64px);
+  --col: calc((100vw - var(--gutter) * 2) / 12);
+  --nav-h: 76px;
+  --radius: 28px;
+  --radius-sm: 14px;
+}
+
+/* dark passages (hotel / contact) flip the ground */
+:root[data-theme="dark"], .theme-dark {
+  --bg: var(--dusk);
+  --fg: var(--white);
+  --muted: rgba(251, 249, 245, 0.55);
+  --line: rgba(251, 249, 245, 0.16);
+}
