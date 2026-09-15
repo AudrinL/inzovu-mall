@@ -50,7 +50,7 @@ export function initScroll() {
     ScrollTrigger.create({
       trigger,
       start: "top 70%",
-      end: () => "+=" + document.documentElement.scrollHeight,
+      endTrigger: "main > footer", end: "bottom top", // footer bottom never reaches the viewport top → stays dark to the end
       onToggle: (st) => st.isActive ? document.documentElement.setAttribute("data-theme", "dark") : document.documentElement.removeAttribute("data-theme"),
     });
   }
