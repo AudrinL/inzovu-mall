@@ -1,13 +1,376 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>inzovu-site</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Inzovu Mall — Kigali's landmark destination. Opening 2027.</title>
+  <meta name="description" content="Shops, dining, leisure and a five-star Odalys hotel on one Kigali hilltop, steps from the Convention Centre. 29,000 m² · EDGE certified · Groupe Duval." />
+  <meta name="theme-color" content="#171820" />
+  <script>history.scrollRestoration = "manual"; scrollTo(0, 0);</script>
+  <link rel="icon" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/assets/img/hero-alt-bg.webp" />
+  <link rel="preload" as="image" href="/assets/img/hero-alt-fg.webp" />
+  <meta property="og:title" content="Inzovu Mall — Kigali, Rwanda" />
+  <meta property="og:description" content="Much more than a mall. A destination on a hill. Opening Q1 2027." />
+  <meta property="og:image" content="/assets/img/aerial.webp" />
+</head>
+<body class="no-cursor">
+
+  <!-- ── preloader ─────────────────────────────────────────── -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <video class="loader__video" id="loader-video" src="/assets/video/satellite.mp4" muted playsinline preload="auto"></video>
+    <div class="loader__scrim"></div>
+    <div class="loader__top">
+      <svg class="loader__mark" viewBox="0 0 208 159" id="loader-mark"><path d=""/></svg>
+      <div class="loader__coords" id="loader-coords">01°57′S · 030°05′E</div>
+    </div>
+    <div class="loader__center">
+      <div>
+        <div class="loader__word t-display"><span class="line-mask"><span class="line" id="loader-word">kigali</span></span></div>
+        <div class="loader__sub" id="loader-sub">Rwanda · Land of a thousand hills</div>
+      </div>
+    </div>
+    <div class="loader__bottom">
+      <div class="loader__coords" data-i18n="loader.alt">alt. 1,567 m</div>
+      <div class="loader__count"><span id="loader-count">0</span><small>%</small></div>
+    </div>
+    <div class="loader__bar"><i id="loader-bar"></i></div>
+    <button class="loader__skip" id="loader-skip" data-i18n="loader.skip">skip</button>
+    <div class="loader__curtain" id="loader-curtain"></div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="curtain" id="curtain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"><span></span></div></div>
+
+  <!-- ── nav ───────────────────────────────────────────────── -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#top" aria-label="Inzovu Mall">
+      <svg viewBox="0 0 208 159" class="mark"><path d=""/></svg>
+      <span class="nav__wordmark">inzovu mall</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#zones" data-i18n="nav.zones">Spaces</a>
+      <a href="#stats" data-i18n="nav.figures">Figures</a>
+      <a href="#build" data-i18n="nav.build">Progress</a>
+      <a href="#plans" data-open-plans data-i18n="nav.plans">Plans</a>
+      <a href="#hotel" data-i18n="nav.hotel">Hotel</a>
+    </nav>
+    <div class="nav__right">
+      <div class="lang" role="group" aria-label="Language"><button data-lang="en" class="is-active">EN</button><span>/</span><button data-lang="fr">FR</button></div>
+      <a class="pill" href="#contact" data-cursor="→"><span class="pill__label"><span data-i18n="nav.cta">Reserve a space</span><span data-i18n="nav.cta">Reserve a space</span></span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></a>
+      <button class="nav__burger" id="burger" aria-label="Menu"><i></i><i></i></button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu">
+    <nav>
+      <a href="#zones" data-i18n="nav.zones">Spaces</a>
+      <a href="#stats" data-i18n="nav.figures">Figures</a>
+      <a href="#build" data-i18n="nav.build">Progress</a>
+      <a href="#plans" data-open-plans data-i18n="nav.plans">Plans</a>
+      <a href="#hotel" data-i18n="nav.hotel">Hotel</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="menu__foot"><span>Kimihurura · Kigali</span><span>Groupe Duval</span></div>
+  </div>
+
+  <div class="ribbon-progress" aria-hidden="true"><i id="progress-bar"></i><b id="progress-label">00</b></div>
+
+  <main id="top">
+
+    <!-- ── hero ─────────────────────────────────────────────── -->
+    <section class="hero" id="hero" data-nav-light>
+      <div class="hero__frame">
+        <div class="hero__layer hero__sky" data-depth="0.04"><picture><source media="(max-width: 900px)" srcset="/assets/img/hero-tall-bg.webp"><img src="/assets/img/hero-alt-bg.webp" alt="" fetchpriority="high" /></picture></div>
+        <div class="hero__layer hero__word t-display" data-depth="0.09"><span class="line-mask"><span class="line" id="hero-word">inzovu</span></span></div>
+        <div class="hero__layer hero__building" data-depth="0.02"><picture><source media="(max-width: 900px)" srcset="/assets/img/hero-tall-fg.webp"><img src="/assets/img/hero-alt-fg.webp" alt="Inzovu Mall — the mall, the Odalys hotel tower and the Kigali Ferris wheel at dusk" fetchpriority="high" /></picture></div>
+      </div>
+      <div class="hero__ui">
+        <div class="hero__meta">
+          <span><em data-i18n="hero.m1k">Location</em>Kimihurura · Kigali · Rwanda</span>
+          <span><em data-i18n="hero.m2k">Status</em><span data-i18n="hero.m2v">Under construction · Delivery Q1 2027</span></span>
+          <span><em data-i18n="hero.m3k">Developer</em>Groupe Duval · Odalys</span>
+        </div>
+        <div></div>
+        <div class="hero__bottom">
+          <h1 class="hero__tagline"><span data-i18n="hero.tag">Much more than a mall.</span> <span class="t-serif" data-i18n="hero.tag2">A destination on a hill.</span></h1>
+          <div class="hero__cta"><a class="pill pill--glass" href="#zones" data-cursor="↓"><span class="pill__label"><span data-i18n="hero.cta">Discover the spaces</span><span data-i18n="hero.cta">Discover the spaces</span></span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v10M3 8l5 5 5-5"/></svg></span></a></div>
+          <div class="hero__stats">
+            <div class="stat-pill"><b data-count="29000">0<small>m²</small></b><span data-i18n="hero.s1">gross leasable area</span></div>
+            <div class="stat-pill"><b data-count="40">0</b><span data-i18n="hero.s2">brands, incl. Rwanda's first duty free</span></div>
+            <div class="stat-pill"><b data-count="95">0</b><span data-i18n="hero.s3">rooms · 5★ Odalys hotel</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero__scroll"><span data-i18n="hero.scroll">scroll</span><i></i></div>
+    </section>
+
+    <!-- ── manifesto ────────────────────────────────────────── -->
+    <section class="manifesto section" id="manifesto">
+      <div class="manifesto__eyebrow"><span class="t-label">01</span><span class="t-label" data-i18n="man.eyebrow">The idea</span></div>
+      <p class="manifesto__text" id="manifesto-text" data-i18n-html="man.text">
+        Shops <span class="tok"><img src="/assets/img/shops-1.webp" alt="" loading="lazy"></span>, dining <span class="tok"><img src="/assets/img/rooftop-night.webp" alt="" loading="lazy"></span>, leisure <span class="tok"><img src="/assets/img/aerial-2.webp" alt="" loading="lazy"></span> and a five-star hotel <span class="tok"><img src="/assets/img/pool-sunset.webp" alt="" loading="lazy"></span> — one living space on a Kigali hilltop, a few steps from the Convention Centre.
+      </p>
+      <div class="manifesto__foot">
+        <p class="t-body" data-i18n="man.p1">Inzovu means elephant in Kinyarwanda. The building carries the name honestly: a white ribbon of terraces curling around a plaza, planted with the hills' own green, opening onto the dome of the Kigali Convention Centre.</p>
+        <p class="t-body" data-i18n="man.p2">Developed by Groupe Duval, operated with Odalys, EDGE-certified for its energy and water design. Works started in Q3 2023. The doors open in the first quarter of 2027.</p>
+      </div>
+    </section>
+
+    <!-- ── approach — film scrub ────────────────────────────── -->
+    <section class="approach section" id="approach" aria-label="Aerial approach" data-nav-light>
+      <div class="approach__stage">
+        <canvas class="approach__canvas" id="approach-canvas"></canvas>
+        <video class="approach__video" id="approach-video" src="/assets/video/plaza.mp4" muted loop playsinline preload="none"></video>
+        <div class="approach__vignette"></div>
+        <div class="approach__frame"></div>
+        <div class="approach__hud">
+          <div><span class="rec" data-i18n="ap.rec">aerial · approach</span><span>01°57′S 030°05′E</span></div>
+          <div></div>
+          <div><span data-i18n="ap.alt">alt. 1,567 m · Kimihurura</span><span id="approach-time">00:00</span></div>
+        </div>
+        <div class="approach__caps">
+          <div class="approach__cap"><span class="t-label" data-i18n="ap.c1k">The land</span><h2 class="t-h2" data-i18n="ap.c1">a thousand hills</h2></div>
+          <div class="approach__cap"><span class="t-label" data-i18n="ap.c2k">The district</span><h2 class="t-h2">kimihurura</h2></div>
+          <div class="approach__cap"><span class="t-label" data-i18n="ap.c3k">The neighbour</span><h2 class="t-h2" data-i18n="ap.c3">kigali convention centre</h2></div>
+          <div class="approach__cap"><span class="t-label" data-i18n="ap.c4k">The landmark</span><h2 class="t-h2">inzovu mall</h2></div>
+        </div>
+        <div class="approach__progress"><i id="approach-progress"></i></div>
+      </div>
+    </section>
+
+    <!-- ── zones — the ribbon ───────────────────────────────── -->
+    <section class="zones section" id="zones">
+      <div class="zones__head">
+        <div><span class="t-label">02 — <span data-i18n="zones.eyebrow">The spaces</span></span><h2 class="t-h2" data-i18n="zones.title">one ribbon,<br>six worlds</h2></div>
+        <span class="t-label" data-i18n="zones.hint">click a space to enter</span>
+      </div>
+      <svg class="zones__ribbon" id="zones-ribbon" preserveAspectRatio="none"><path id="zones-ribbon-path" d=""/></svg>
+      <div class="zones__track" id="zones-track">
+        <article class="zone-card" data-zone="shops" data-cursor="enter">
+          <img src="/assets/img/shops-1.webp" alt="" loading="lazy">
+          <div class="zone-card__ui">
+            <div class="zone-card__idx"><span>01 / 06</span><span data-i18n="z.shops.k">retail · duty free</span></div>
+            <div class="zone-card__num t-num">9,000<small>m²</small></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.shops.t">shops</h3><p class="zone-card__desc" data-i18n="z.shops.d">40 brands. VAT refund and Rwanda's first in-mall duty free.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+          </div>
+        </article>
+        <article class="zone-card" data-zone="business" data-cursor="enter">
+          <img src="/assets/img/business-2.webp" alt="" loading="lazy">
+          <div class="zone-card__ui">
+            <div class="zone-card__idx"><span>02 / 06</span><span data-i18n="z.biz.k">offices · conferences</span></div>
+            <div class="zone-card__num t-num">6,000<small>m²</small></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.biz.t">business centre</h3><p class="zone-card__desc" data-i18n="z.biz.d">Office floors and a conference venue next door to the KCC.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+          </div>
+        </article>
+        <article class="zone-card" data-zone="dining" data-cursor="enter">
+          <img src="/assets/img/rooftop-night.webp" alt="" loading="lazy">
+          <div class="zone-card__ui">
+            <div class="zone-card__idx"><span>03 / 06</span><span data-i18n="z.dine.k">restaurant · food court</span></div>
+            <div class="zone-card__num t-num">1,635<small>m²</small></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.dine.t">dining</h3><p class="zone-card__desc" data-i18n="z.dine.d">A restaurant, a food court, and a rooftop terrace facing the hills.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+          </div>
+        </article>
+        <article class="zone-card" data-zone="leisure" data-cursor="enter">
+          <img src="/assets/img/aerial-2.webp" alt="" loading="lazy">
+          <div class="zone-card__ui">
+            <div class="zone-card__idx"><span>04 / 06</span><span data-i18n="z.play.k">kids · gym · bowling · wheel</span></div>
+            <div class="zone-card__num t-num">4,000<small>m²</small></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.play.t">leisure</h3><p class="zone-card__desc" data-i18n="z.play.d">1,800 m² kids area, 700 m² gym, bowling — and the Kigali Ferris wheel.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+          </div>
+        </article>
+        <article class="zone-card" data-zone="hotel" data-cursor="enter">
+          <img src="/assets/img/pool-sunset.webp" alt="" loading="lazy">
+          <div class="zone-card__ui">
+            <div class="zone-card__idx"><span>05 / 06</span><span data-i18n="z.hotel.k">5★ · odalys</span></div>
+            <div class="zone-card__num t-num">95<small data-i18n="z.hotel.u">rooms</small></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.hotel.t">inzovu hôtel</h3><p class="zone-card__desc" data-i18n="z.hotel.d">Five stars, a rooftop pool, and the Convention Centre dome for a view.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+          </div>
+        </article>
+        <article class="zone-card" data-zone="access" data-cursor="enter">
+          <img src="/assets/img/aerial.webp" alt="" loading="lazy">
+          <div class="zone-card__ui">
+            <div class="zone-card__idx"><span>06 / 06</span><span data-i18n="z.acc.k">parking · access</span></div>
+            <div class="zone-card__num t-num">400<small data-i18n="z.acc.u">spaces</small></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.acc.t">access</h3><p class="zone-card__desc" data-i18n="z.acc.d">400 parking spaces, KN 5 Road, 10 minutes from the airport road.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+          </div>
+        </article>
+      </div>
+      <div class="zones__hint" data-i18n="zones.scroll">scroll to travel the ribbon →</div>
+    </section>
+
+    <!-- ── stats — proportional ─────────────────────────────── -->
+    <section class="stats section" id="stats">
+      <div class="stats__head">
+        <div><span class="t-label">03 — <span data-i18n="stats.eyebrow">The figures, to scale</span></span><div class="stats__total t-num"><span data-count="29000">0</span><small>m²</small></div></div>
+        <p class="t-body" data-i18n="stats.p">Every block below is drawn in proportion to the floor area it represents. Hover to see the space; the whole rectangle is the 29,000 m² of gross leasable area.</p>
+      </div>
+      <div class="treemap" id="treemap"></div>
+      <div class="stats__note"><span class="t-label" data-i18n="stats.n1">Areas per developer figures · rounded</span><span class="t-label" data-i18n="stats.n2">+ 400 parking spaces, not to scale</span></div>
+    </section>
+
+    <!-- ── build — earth → landmark ─────────────────────────── -->
+    <section class="build section" id="build">
+      <div class="build__head">
+        <div><span class="t-label">04 — <span data-i18n="build.eyebrow">Progress</span></span><h2 class="t-h2" data-i18n="build.title">from red earth<br>to white ribbon</h2></div>
+        <p class="t-body" data-i18n="build.p">Works began in the third quarter of 2023. Drag the line to move between the site as it was and the building as it will be.</p>
+      </div>
+      <div class="compare" id="compare" data-cursor="drag">
+        <img class="compare__before" src="/assets/img/site-1.webp" alt="Construction site, Kimihurura, 2024" loading="lazy">
+        <img class="compare__after" src="/assets/img/aerial.webp" alt="Aerial render of Inzovu Mall" loading="lazy">
+        <div class="compare__handle"><b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></b></div>
+        <span class="compare__tag compare__tag--a" data-i18n="build.a">Q3 2023 · groundworks</span>
+        <span class="compare__tag compare__tag--b" data-i18n="build.b">Q1 2027 · delivery</span>
+      </div>
+      <div class="timeline">
+        <div><span class="t-label">Q3 2023</span><div class="t-num">01</div><p class="t-body" data-i18n="build.t1">Works start. Excavation and foundations on the KN 5 Road plot.</p></div>
+        <div><span class="t-label">2024 – 2025</span><div class="t-num">02</div><p class="t-body" data-i18n="build.t2">Structure rises. Retail podium, then the hotel and office towers.</p></div>
+        <div><span class="t-label">2026</span><div class="t-num">03</div><p class="t-body" data-i18n="build.t3">Facades, terraces, fit-out. Tenants take their keys.</p></div>
+        <div><span class="t-label">Q1 2027</span><div class="t-num live"><span id="months-left">—</span></div><p class="t-body" data-i18n="build.t4">months to opening. The counter is live.</p></div>
+      </div>
+    </section>
+
+    <!-- ── edge — sustainability ────────────────────────────── -->
+    <section class="edge section" id="edge">
+      <div class="edge__visual" data-parallax>
+        <img src="/assets/img/plaza-5.webp" alt="Planted terraces of the Inzovu Mall towers" loading="lazy">
+        <div class="edge__badge">EDGE<br>certified<br>green<br>building</div>
+      </div>
+      <div class="edge__copy">
+        <span class="t-label">05 — <span data-i18n="edge.eyebrow">Built for the climate</span></span>
+        <h2 class="t-h2" data-i18n="edge.title">the hills grow<br>up the building</h2>
+        <p class="t-body" data-i18n="edge.p">Every terrace of the ribbon is planted. The building is EDGE-certified for its energy, water and materials design — a measurable commitment to Rwanda's climate goals, not a coat of green paint.</p>
+        <ul class="edge__list">
+          <li><span class="t-label">01</span><span data-i18n="edge.l1">Energy-efficient envelope and systems</span><span class="t-label">EDGE</span></li>
+          <li><span class="t-label">02</span><span data-i18n="edge.l2">Reduced water demand across the complex</span><span class="t-label">EDGE</span></li>
+          <li><span class="t-label">03</span><span data-i18n="edge.l3">Lower embodied carbon in materials</span><span class="t-label">EDGE</span></li>
+          <li><span class="t-label">04</span><span data-i18n="edge.l4">Planted terraces on every level of both towers</span><span class="t-label">Design</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── africa ───────────────────────────────────────────── -->
+    <section class="africa section" id="africa">
+      <div>
+        <span class="t-label">06 — <span data-i18n="af.eyebrow">Groupe Duval in Africa</span></span>
+        <h2 class="t-h2" style="margin:12px 0 28px" data-i18n="af.title">six projects,<br>five countries</h2>
+        <div class="africa__list" id="africa-list">
+          <div class="africa__row" data-pin="sama"><span class="t-label">01</span><span class="name">Tour Sama</span><span class="t-body">Abidjan · CI</span><span class="t-body">6,000 m²</span><span class="t-label">2021</span></div>
+          <div class="africa__row" data-pin="notrepere"><span class="t-label">02</span><span class="name">Village Notre Père</span><span class="t-body">Abidjan · CI</span><span class="t-body">23,000 m²</span><span class="t-label">2028</span></div>
+          <div class="africa__row" data-pin="riviera"><span class="t-label">03</span><span class="name">Riviera Park</span><span class="t-body">Abidjan · CI</span><span class="t-body">40,000 m²</span><span class="t-label">2028</span></div>
+          <div class="africa__row" data-pin="sadi"><span class="t-label">04</span><span class="name">Sadi Mall</span><span class="t-body">Douala · CM</span><span class="t-body">12,000 m²</span><span class="t-label">2027</span></div>
+          <div class="africa__row" data-pin="lome"><span class="t-label">05</span><span class="name">Shop'In Lomé</span><span class="t-body">Lomé · TG</span><span class="t-body">13,000 m²</span><span class="t-label">2028</span></div>
+          <div class="africa__row is-home is-active" data-pin="kigali"><span class="t-label">06</span><span class="name">Inzovu Mall</span><span class="t-body">Kigali · RW</span><span class="t-body">29,000 m²</span><span class="t-label">2027</span></div>
+        </div>
+      </div>
+      <div class="africa__map" id="africa-map"></div>
+    </section>
+
+    <!-- ── hotel — dusk ─────────────────────────────────────── -->
+    <section class="hotel section" id="hotel" data-theme-trigger="dark">
+      <div class="hotel__head">
+        <div><span class="t-label">07 — <span data-i18n="hotel.eyebrow">Inzovu Hôtel by Odalys</span></span><h2 class="t-h1" data-i18n="hotel.title">stay until<br><span class="t-serif">the lights come on</span></h2></div>
+        <p class="t-body" data-i18n="hotel.p">Ninety-five rooms, five stars, a rooftop pool, and a terrace that looks straight at the Convention Centre dome. Operated by Odalys, Groupe Duval's hospitality arm, for business travellers who would rather not leave the building.</p>
+      </div>
+      <div class="hotel__gallery">
+        <figure class="hotel__tile hotel__tile--a"><div class="parallax" data-parallax><img src="/assets/img/rooftop-night.webp" alt="Rooftop terrace at dusk" loading="lazy"></div><figcaption data-i18n="hotel.c1">rooftop terrace · dusk</figcaption></figure>
+        <figure class="hotel__tile hotel__tile--b"><video src="/assets/video/pool.mp4" poster="/assets/img/pool-sunset.webp" muted loop playsinline preload="metadata" data-autoplay></video><figcaption data-i18n="hotel.c2">rooftop pool · sunset</figcaption></figure>
+        <figure class="hotel__tile hotel__tile--c"><img src="/assets/img/hotel-room.webp" alt="Hotel room" loading="lazy"><figcaption data-i18n="hotel.c3">room · odalys</figcaption></figure>
+      </div>
+      <div class="hotel__facts">
+        <div><span class="t-label" data-i18n="hotel.f1k">Rooms</span><div class="t-num"><span data-count="95">0</span></div><p class="t-body" data-i18n="hotel.f1">Business-tourism residence format.</p></div>
+        <div><span class="t-label" data-i18n="hotel.f2k">Rating</span><div class="t-num">5<small>★</small></div><p class="t-body" data-i18n="hotel.f2">Five-star standard, Odalys operated.</p></div>
+        <div><span class="t-label" data-i18n="hotel.f3k">Floor area</span><div class="t-num"><span data-count="5000">0</span><small>m²</small></div><p class="t-body" data-i18n="hotel.f3">Across the tower and the roof.</p></div>
+        <div><span class="t-label" data-i18n="hotel.f4k">Roof</span><div class="t-num">1<small data-i18n="hotel.f4u">pool</small></div><p class="t-body" data-i18n="hotel.f4">And the best seat for the KCC dome.</p></div>
+      </div>
+    </section>
+
+    <!-- ── contact — conversational ─────────────────────────── -->
+    <section class="contact section" id="contact">
+      <div class="contact__head"><span class="t-label">08 — <span data-i18n="ct.eyebrow">Join the adventure</span></span><h2 class="t-h2" style="margin-top:12px" data-i18n="ct.title">reserve your place<br>on the ribbon</h2></div>
+      <form class="convo" id="convo" novalidate>
+        <span data-i18n="ct.s1">Hello, I'm</span>
+        <span class="slot"><input name="name" placeholder="your name" autocomplete="name" required data-i18n-ph="ct.name"></span>
+        <span data-i18n="ct.s2">from</span>
+        <span class="slot"><input name="company" placeholder="your company" autocomplete="organization" data-i18n-ph="ct.company"></span>.
+        <span data-i18n="ct.s3">I'm interested in</span>
+        <span class="slot slot--select" data-name="interest"><input readonly value="" placeholder="a retail space" data-i18n-ph="ct.interest"><span class="opts"><button type="button" data-v="retail" data-i18n="ct.o1">a retail space</button><button type="button" data-v="office" data-i18n="ct.o2">office space</button><button type="button" data-v="restaurant" data-i18n="ct.o3">a restaurant unit</button><button type="button" data-v="brochure" data-i18n="ct.o4">the brochure</button><button type="button" data-v="other" data-i18n="ct.o5">something else</button></span></span>.
+        <span data-i18n="ct.s4">Reach me at</span>
+        <span class="slot slot--wide"><input name="email" type="email" placeholder="email" autocomplete="email" required data-i18n-ph="ct.email"></span>
+        <span data-i18n="ct.s5">or</span>
+        <span class="slot"><input name="phone" type="tel" placeholder="phone" autocomplete="tel" data-i18n-ph="ct.phone"></span>.
+        <input type="text" name="_hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      </form>
+      <div class="contact__foot">
+        <button class="pill pill--gold" id="convo-send" data-cursor="send"><span class="pill__label"><span data-i18n="ct.send">Send to the leasing team</span><span data-i18n="ct.send">Send to the leasing team</span></span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></button>
+        <p class="t-label" data-i18n="ct.note">One of our experts will get back to you within two working days. Your details go to Groupe Duval's leasing team and nowhere else.</p>
+      </div>
+      <div class="contact__done">
+        <h3 class="t-h2" data-i18n="ct.done">received. <span class="t-serif">murakoze.</span></h3>
+        <p class="t-body" data-i18n="ct.done2">Thank you — we'll be in touch shortly.</p>
+      </div>
+    </section>
+
+    <!-- ── footer ───────────────────────────────────────────── -->
+    <footer class="footer" id="footer">
+      <div class="footer__marquee t-display" id="marquee"><span>inzovu mall — kigali — inzovu mall — kigali — </span><span>inzovu mall — kigali — inzovu mall — kigali — </span></div>
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo"><svg viewBox="0 0 208 159" class="mark"><path d=""/></svg></div>
+          <p class="t-body" style="margin-top:16px;max-width:34ch" data-i18n="ft.p">KN 5 Road, Kimihurura, Kigali, Rwanda. Next to the Kigali Convention Centre.</p>
+          <div class="footer__partners"><img src="/assets/img/partner-odalys.webp" alt="Odalys"><img src="/assets/img/partner-but.webp" alt="BUT"><img src="/assets/img/partner-intermarche.webp" alt="Intermarché"></div>
+        </div>
+        <div><div class="t-label" data-i18n="ft.h1">Spaces</div><a href="#" data-open-zone="shops" data-i18n="z.shops.t">shops</a><a href="#" data-open-zone="business" data-i18n="z.biz.t">business centre</a><a href="#" data-open-zone="dining" data-i18n="z.dine.t">dining</a><a href="#" data-open-zone="leisure" data-i18n="z.play.t">leisure</a><a href="#" data-open-zone="hotel" data-i18n="z.hotel.t">inzovu hôtel</a><a href="#" data-open-zone="access" data-i18n="z.acc.t">access</a></div>
+        <div><div class="t-label" data-i18n="ft.h2">Project</div><a href="#plans" data-open-plans data-i18n="nav.plans">Plans</a><a href="#build" data-i18n="nav.build">Progress</a><a href="#edge">EDGE</a><a href="#africa" data-i18n="ft.duval">Groupe Duval in Africa</a><a href="https://www.groupeduval.com" target="_blank" rel="noopener">groupeduval.com ↗</a></div>
+        <div><div class="t-label">Contact</div><a href="mailto:contact@groupeduval.com">contact@groupeduval.com</a><a href="tel:+33146994710">+33 1 46 99 47 10</a><a href="#">45 av. Georges Mandel<br>75116 Paris</a></div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year"></span> Groupe Duval · Inzovu Mall</span>
+        <span><span data-i18n="ft.time">Kigali time</span> <b id="kigali-time">--:--</b> CAT</span>
+        <span><a href="#" data-i18n="ft.legal">Legal notice</a> · <a href="#" data-i18n="ft.privacy">Privacy</a></span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ── zone overlay ─────────────────────────────────────── -->
+  <div class="zone-view" id="zone-view" role="dialog" aria-modal="true" aria-label="Space">
+    <div class="zone-view__media" id="zone-media"></div>
+    <div class="zone-view__frame"></div>
+    <div class="zone-view__dots" id="zone-dots"></div>
+    <div class="zone-view__side" id="zone-side">scroll · gallery</div>
+    <div class="zone-view__ui">
+      <div class="zone-view__top">
+        <span class="t-label" id="zone-idx">01 / 06</span>
+        <button class="pill pill--glass" id="zone-close" data-cursor="×"><span class="pill__label"><span data-i18n="zv.close">Back to the ribbon</span><span data-i18n="zv.close">Back to the ribbon</span></span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></button>
+      </div>
+      <div class="zone-view__title">
+        <span class="t-label" id="zone-kicker"></span>
+        <h2 class="t-display" id="zone-title"></h2>
+        <p class="t-lead" id="zone-lead"></p>
+      </div>
+      <div class="zone-view__bar">
+        <button class="zone-view__nav" id="zone-prev"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L5 8l5 5"/></svg><span><span class="t-label" data-i18n="zv.prev">previous</span><br><b id="zone-prev-name"></b></span></button>
+        <div class="zone-view__specs" id="zone-specs"></div>
+        <button class="zone-view__nav" id="zone-next"><span style="text-align:right"><span class="t-label" data-i18n="zv.next">next</span><br><b id="zone-next-name"></b></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── plans overlay ────────────────────────────────────── -->
+  <div class="plans-view" id="plans-view" role="dialog" aria-modal="true" aria-label="Floor plans">
+    <aside class="plans-view__side">
+      <div><span class="t-label" data-i18n="pl.eyebrow">Floor plans</span><h2 class="t-h3" style="margin-top:8px" data-i18n="pl.title">level by level</h2></div>
+      <div class="plans-view__levels" id="plans-levels"></div>
+      <p class="t-body" style="font-size:12px" data-i18n="pl.note">Indicative layouts from the developer. Unit sizes and positions may evolve until delivery.</p>
+    </aside>
+    <div class="plans-view__stage" id="plans-stage"><div class="plans-view__grid"></div></div>
+    <button class="pill pill--ghost plans-view__close" id="plans-close" data-cursor="×"><span class="pill__label"><span data-i18n="pl.close">Close</span><span data-i18n="pl.close">Close</span></span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></button>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
 </html>

@@ -138,16 +138,11 @@ def run_fonts():
 # ---------- frames ----------
 def run_frames():
     film = os.path.join(SRC, "video", "Inzovu-Mall_Animation.mp4")
-    # Approach sequence 6s -> 18s, 20 fps => 240 frames, 1280 wide, graded via ffmpeg curves
+    # Approach sequence 6s -> 18s, 16 fps => 192 frames, 1280 wide, graded via ffmpeg curves
     seq = os.path.join(FR, "approach"); os.makedirs(seq, exist_ok=True)
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "6", "-t", "12", "-i", film,
-                    "-vf", "fps=20,scale=1280:-2,colorbalance=rs=.06:gs=0:bs=-.08:rh=.08:gh=.02:bh=-.1,eq=contrast=1.06:saturation=1.05:gamma=0.96,vignette=PI/5",
-                    "-c:v", "libwebp", "-quality", "72", os.path.join(seq, "f_%03d.webp")], check=True)
-    # Rooftop / hotel pull-back 72s -> 82s, 20fps
-    seq2 = os.path.join(FR, "rooftop"); os.makedirs(seq2, exist_ok=True)
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "72", "-t", "10", "-i", film,
-                    "-vf", "fps=20,scale=1280:-2,colorbalance=rs=.08:bs=-.1:rh=.1:bh=-.12,eq=contrast=1.08:saturation=1.05:gamma=0.9,vignette=PI/4.5",
-                    "-c:v", "libwebp", "-quality", "72", os.path.join(seq2, "f_%03d.webp")], check=True)
+                    "-vf", "fps=16,scale=1280:-2,colorbalance=rs=.06:gs=0:bs=-.08:rh=.08:gh=.02:bh=-.1,eq=contrast=1.06:saturation=1.05:gamma=0.96,vignette=PI/5",
+                    "-c:v", "libwebp", "-quality", "64", os.path.join(seq, "f_%03d.webp")], check=True)
 
 def run_video():
     inv = os.path.join(SRC, "video", "Invozu.mp4")
