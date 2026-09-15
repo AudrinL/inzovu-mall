@@ -25,7 +25,10 @@ export function initHero() {
       target.x = (e.clientX / innerWidth - 0.5) * 2;
       target.y = (e.clientY / innerHeight - 0.5) * 2;
     });
+    let live = true;
+    ScrollTrigger.create({ trigger: hero, start: "top bottom", end: "bottom top", onToggle: (st) => (live = st.isActive) });
     gsap.ticker.add(() => {
+      if (!live) return;
       cur.x += (target.x - cur.x) * 0.05; cur.y += (target.y - cur.y) * 0.05;
       layers.forEach((l) => {
         const d = Number(l.dataset.depth) * 400;

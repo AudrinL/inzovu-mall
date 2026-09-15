@@ -28,7 +28,7 @@ export function initParallax() {
   const lights = document.createElement("div"); lights.className = "hotel__lights";
   lights.innerHTML = `<svg width="100%" height="60" viewBox="0 0 1200 60" preserveAspectRatio="none" style="overflow:visible">
     <path d="M0 8 Q300 60 600 8 T1200 8" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
-    ${Array.from({ length: 17 }, (_, i) => { const x = (i / 16) * 1200; const t = i / 16; const y = 8 + Math.sin(t * Math.PI) * 22 * (t < 0.5 ? 1 : 1) * (Math.abs(Math.sin(t * Math.PI * 2)) + 0.2); return `<circle cx="${x}" cy="${y + 6}" r="2.2" fill="#ffd9a0" class="bulb" style="filter:drop-shadow(0 0 6px #ffc46b)"/>`; }).join("")}
+    ${Array.from({ length: 17 }, (_, i) => { const x = (i / 16) * 1200; const t = i / 16; const y = 8 + Math.sin(t * Math.PI) * 22 * (t < 0.5 ? 1 : 1) * (Math.abs(Math.sin(t * Math.PI * 2)) + 0.2); return `<circle cx="${x}" cy="${y + 6}" r="7" class="glow bulb"/><circle cx="${x}" cy="${y + 6}" r="2.2" class="bulb"/>`; }).join("")}
   </svg>`;
   hotel.prepend(lights);
   gsap.fromTo(lights.querySelectorAll(".bulb"), { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: { each: 0.07, from: "random" }, scrollTrigger: { trigger: hotel, start: "top 60%", once: true } });

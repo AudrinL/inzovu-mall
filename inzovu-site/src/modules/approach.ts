@@ -15,6 +15,7 @@ export function initApproach() {
   const caps = Array.from(section.querySelectorAll<HTMLElement>(".approach__cap"));
   const time = document.getElementById("approach-time")!;
   const progress = document.getElementById("approach-progress")!;
+  const cue = document.getElementById("approach-cue")!;
 
   if (isMobile() || reduced) {
     canvas.remove();
@@ -67,6 +68,7 @@ export function initApproach() {
         onUpdate: (self) => {
           draw(Math.round(self.progress * (FRAMES - 1)));
           progress.style.transform = `scaleX(${self.progress})`;
+          cue.style.opacity = self.progress > 0.12 && self.progress < 0.97 ? "0" : "1";
           const t = self.progress * 12; time.textContent = `00:${String(Math.floor(t)).padStart(2, "0")}.${String(Math.floor((t % 1) * 24)).padStart(2, "0")}`;
         } } });
   }

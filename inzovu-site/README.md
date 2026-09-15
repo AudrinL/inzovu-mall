@@ -21,7 +21,7 @@ python tools/assets.py images     # or one stage: images | fonts | frames | vide
 | Beat | What happens | Where |
 |---|---|---|
 | Preloader | Satellite descent from Rwanda into Kigali (cut from the developer's film), live coordinates, logo mark draws itself, sand curtain hands over. Plays once per session, skippable. | `modules/preloader.ts` |
-| Hero | The wordmark sits *behind* the towers (sky / type / building are three layers — the sky was flood-filled out of the render). Pointer parallax by depth, scroll pushes the building forward. Frosted stat pills, notch scroll cue. | `modules/hero.ts`, `tools/assets.py → sky_cutout_flood` |
+| Hero | The wordmark sits *behind* the towers (sky / type / building are three layers — the sky was masked out of the render with GrabCut). Pointer parallax by depth, scroll pushes the building forward. Frosted stat pills, notch scroll cue. | `modules/hero.ts`, `tools/hero_main.py` (GrabCut sky mask), `tools/assets.py → sky_cutout_flood` |
 | Manifesto | Words illuminate as the sentence passes mid-screen; inline render "tokens" pop in and expand on hover. | `modules/misc.ts → initManifesto` |
 | Aerial approach | 192 WebP frames of the fly-through painted to a canvas, scrubbed by scroll, with a HUD, timecode and four caption beats. Coarse-then-fine loading so the first scrub is never blank. Mobile / reduced-motion gets a looping video instead. | `modules/approach.ts` |
 | The ribbon | Six zone cards travel horizontally; a green line — the building's own curve — draws itself weaving over and under them. | `modules/zones.ts` |
@@ -34,7 +34,7 @@ python tools/assets.py images     # or one stage: images | fonts | frames | vide
 | Contact | A conversational sentence instead of a form. Inline validation, dropdown slot, honeypot. Success state: *received. murakoze.* | `modules/misc.ts → initContact` |
 | Footer | Wordmark marquee, live Kigali clock, partner marks. | `modules/misc.ts → initFooter` |
 | Plans | Full-screen floor-plan viewer (the plans were sitting unused in the old media library). | `modules/misc.ts → initPlans` |
-| Chrome | Custom cursor with contextual labels, magnetic pills, difference-blend nav that inverts over any background, left-edge progress ribbon, film grain. | `modules/cursor.ts`, `styles/chrome.css` |
+| Chrome | Custom cursor with contextual labels, magnetic pills, theme-aware nav with a frosted ground once scrolled, left-edge progress ribbon, film grain. | `modules/cursor.ts`, `styles/chrome.css` |
 
 FR/EN toggles in place with a crossfade (`modules/i18n.ts`); choice persists.
 
@@ -59,3 +59,4 @@ moments, JetBrains Mono for metadata.
 - Frame sequence is 9 MB and only starts loading when the section is 1.5 screens away; mobile never loads it.
 - `prefers-reduced-motion` is honoured: no preloader, no scrub, no parallax, instant reveals.
 - Pinned sections use `refreshPriority` so triggers created earlier still compute against the pin spacer.
+- Nothing page-wide uses `mix-blend-mode` or an animated filter: the grain is a static compositor layer, the Africa dots are a single pattern-filled path, the hotel string lights are plain circles, and the hero parallax ticker sleeps when the hero is off-screen. `backdrop-filter` only runs on the nav once it has a ground to blur.

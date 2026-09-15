@@ -8,7 +8,7 @@ export function initBuild() {
   set(0.5);
 
   const onMove = (e: PointerEvent) => { if (!userHeld) return; const r = el.getBoundingClientRect(); set((e.clientX - r.left) / r.width); };
-  el.addEventListener("pointerdown", (e) => { userHeld = true; userTouched = true; el.setPointerCapture(e.pointerId); onMove(e); });
+  el.addEventListener("pointerdown", (e) => { userHeld = true; userTouched = true; el.classList.add("is-touched"); el.setPointerCapture(e.pointerId); onMove(e); });
   el.addEventListener("pointermove", onMove);
   el.addEventListener("pointerup", () => (userHeld = false));
   el.addEventListener("pointercancel", () => (userHeld = false));

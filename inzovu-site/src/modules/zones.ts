@@ -40,6 +40,19 @@ export function initZones() {
     return len;
   };
 
+  const bar = document.getElementById("zones-track-bar")!;
+  const idx = document.getElementById("zones-idx")!;
+  // prev / next buttons step the pinned scroll by one card
+  const step = (dir: 1 | -1) => {
+    if (!horizontal) return;
+    const span = horizontal.end - horizontal.start;
+    const cur = Math.round(horizontal.progress * cards.length);
+    const target = Math.max(0, Math.min(cards.length, cur + dir));
+    lenis.scrollTo(horizontal.start + (target / cards.length) * span, { duration: 1.1, easing: (t) => 1 - Math.pow(1 - t, 4) });
+  };
+  document.getElementById("zones-prev")!.addEventListener("click", () => step(-1));
+  document.getElementById("zones-next")!.addEventListener("click", () => step(1));
+
   const setup = () => {
     horizontal?.kill();
     if (isMobile()) { gsap.set(track, { x: 0 }); return; }
@@ -47,7 +60,11 @@ export function initZones() {
     const dist = () => track.scrollWidth - innerWidth;
     const tl = gsap.timeline({ scrollTrigger: {
       trigger: section, start: "top top", end: () => "+=" + (dist() + innerHeight * 0.5), pin: true, scrub: 0.6, invalidateOnRefresh: true, refreshPriority: 10,
-      onUpdate: (self) => { path.style.strokeDashoffset = `${len * (1 - Math.min(1, self.progress * 1.15))}`; },
+      onUpdate: (self) => {
+        path.style.strokeDashoffset = `${len * (1 - Math.min(1, self.progress * 1.15))}`;
+        bar.style.setProperty("--p", String(self.progress));
+        idx.textContent = String(Math.min(cards.length, 1 + Math.floor(self.progress * cards.length))).padStart(2, "0");
+      },
     } });
     tl.to([track, svg], { x: () => -dist(), ease: "none" }, 0);
     horizontal = tl.scrollTrigger!;

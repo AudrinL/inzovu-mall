@@ -27,9 +27,10 @@ export function initAfrica() {
   const pathFrom = (pts: [number, number][]) => pts.map((p, i) => { const q = proj(p[0], p[1]); return `${i ? "L" : "M"}${q.x.toFixed(1)} ${q.y.toFixed(1)}`; }).join(" ") + "Z";
 
   // dot grid clipped to the continent
-  const step = 13; let dots = "";
-  const clip = `<clipPath id="af-clip"><path d="${pathFrom(COAST)}"/><path d="${pathFrom(MADA)}"/></clipPath><clipPath id="af-grow"><circle id="af-reveal" cx="${proj(PINS.kigali.lon, PINS.kigali.lat).x}" cy="${proj(PINS.kigali.lon, PINS.kigali.lat).y}" r="0"/></clipPath>`;
-  for (let y = 0; y < H; y += step) for (let x = 0; x < W; x += step) dots += `<circle class="dot" cx="${x + (y / step % 2) * step / 2}" cy="${y}" r="1.6"/>`;
+  const step = 13;
+  const kg = proj(PINS.kigali.lon, PINS.kigali.lat);
+  const clip = `<pattern id="af-dots" width="${step}" height="${step * 2}" patternUnits="userSpaceOnUse"><circle class="dot" cx="0" cy="0" r="1.6"/><circle class="dot" cx="${step / 2}" cy="${step}" r="1.6"/></pattern><clipPath id="af-grow"><circle id="af-reveal" cx="${kg.x}" cy="${kg.y}" r="0"/></clipPath>`;
+  const dots = `<path fill="url(#af-dots)" d="${pathFrom(COAST)}"/><path fill="url(#af-dots)" d="${pathFrom(MADA)}"/>`;
 
   const home = proj(PINS.kigali.lon, PINS.kigali.lat);
   const links = Object.entries(PINS).filter(([k]) => k !== "kigali").map(([k, p]) => {
@@ -41,7 +42,7 @@ export function initAfrica() {
     return `<g class="pin ${k === "kigali" ? "home is-active" : ""}" data-pin="${k}" transform="translate(${q.x} ${q.y})"><circle class="halo" r="6"/><circle r="4"/><text x="10" y="4" font-family="var(--font-mono)" font-size="10" fill="currentColor" opacity=".7">${p.name}</text></g>`;
   }).join("");
 
-  root.innerHTML = `<svg viewBox="0 0 ${W} ${H}"><defs>${clip}</defs><g clip-path="url(#af-grow)"><g clip-path="url(#af-clip)">${dots}</g></g><path class="outline" d="${pathFrom(COAST)}"/><path class="outline" d="${pathFrom(MADA)}"/>${links}${pins}</svg>`;
+  root.innerHTML = `<svg viewBox="0 0 ${W} ${H}"><defs>${clip}</defs><g clip-path="url(#af-grow)">${dots}</g><path class="outline" d="${pathFrom(COAST)}"/><path class="outline" d="${pathFrom(MADA)}"/>${links}${pins}</svg>`;
 
   const svg = root.querySelector("svg")!;
   const setActive = (key: string) => {

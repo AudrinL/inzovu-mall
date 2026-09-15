@@ -56,8 +56,8 @@ export function initStats() {
       const fs = Math.round(Math.max(16, Math.min(64, k.w * 0.13, k.h * 0.26)));
       el.style.cssText = `left:${k.x + gap / 2}px;top:${k.y + gap / 2}px;width:${k.w - gap}px;height:${k.h - gap}px;--cell-img:url(${k.c.img});--fs:${fs}px`;
       const pct = Math.round((k.c.v / 29000) * 100);
-      el.innerHTML = `<span class="t-label">${pct}%</span><div><b>${k.c.v.toLocaleString("en-US")}<small> m²</small></b><div class="name">${k.c.name[L]}</div></div>`;
-      el.setAttribute("data-cursor", L === "fr" ? "voir" : "view");
+      el.innerHTML = `<span class="t-label">${pct}%</span><div><b>${k.c.v.toLocaleString("en-US")}<small> m²</small></b><div class="name">${k.c.name[L]}</div></div><span class="enter">${L === "fr" ? "entrer ↗" : "enter ↗"}</span>`;
+      el.setAttribute("data-cursor", L === "fr" ? "entrer" : "enter");
       root.appendChild(el);
     });
     const els = Array.from(root.children);

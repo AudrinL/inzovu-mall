@@ -55,25 +55,47 @@ def sky_cutout(path):
     fg = np.dstack([a, (1 - m) * 255]).astype(np.uint8)
     return im, Image.fromarray(fg, "RGBA")
 
-def sky_cutout_flood(path, tol=6):
-    """Flood-fill the sky from the top edge (works for pale/neutral skies where chroma keying fails)."""
+def sky_cutout_flood(path, tol=5):
+    """Sky cut-out for pale/gradient skies.
+    1. Rough sky seed: flood-fill from the top edge on a smoothed copy.
+    2. Fit a 2-D quadratic colour model of the sky to the seed (the sky is a smooth gradient).
+    3. Classify every pixel by distance to the model -> keeps palm fronds and Ferris-wheel spokes intact.
+    4. Keep only sky connected to the top edge, so balconies that happen to match stay opaque.
+    5. Feather."""
     import cv2
     im = Image.open(path).convert("RGB")
     a = np.asarray(im)
-    sm = cv2.bilateralFilter(a, 9, 40, 9)
-    h, w = sm.shape[:2]
+    h, w = a.shape[:2]
+    sm = cv2.bilateralFilter(a, 7, 30, 7)
     mask = np.zeros((h + 2, w + 2), np.uint8)
     flags = 4 | (255 << 8) | cv2.FLOODFILL_MASK_ONLY
     for x in range(0, w, 8):
         if mask[1, x + 1] == 0:
             cv2.floodFill(sm.copy(), mask, (x, 0), 0, (tol,) * 3, (tol,) * 3, flags)
-    m = mask[1:-1, 1:-1].astype(np.float32) / 255
-    # kill thin leaks into facades (balcony slots), then keep only the region connected to the top edge
-    m8 = cv2.morphologyEx((m * 255).astype(np.uint8), cv2.MORPH_OPEN, np.ones((13, 13), np.uint8))
-    n, lab = cv2.connectedComponents(m8)
-    keep = set(np.unique(lab[0, :])) - {0}
+    seed = mask[1:-1, 1:-1] > 0
+    seed = cv2.erode(seed.astype(np.uint8), np.ones((15, 15), np.uint8)) > 0   # trust only the deep sky
+    ys, xs = np.nonzero(seed)
+    X = np.stack([np.ones_like(xs), xs / w, ys / h, (xs / w) ** 2, (ys / h) ** 2, (xs / w) * (ys / h)], 1).astype(np.float64)
+    coef, *_ = np.linalg.lstsq(X, a[ys, xs].astype(np.float64), rcond=None)
+    gy, gx = np.mgrid[0:h, 0:w]
+    Xa = np.stack([np.ones(h * w), gx.ravel() / w, gy.ravel() / h, (gx.ravel() / w) ** 2, (gy.ravel() / h) ** 2, (gx.ravel() / w) * (gy.ravel() / h)], 1)
+    model = (Xa @ coef).reshape(h, w, 3)
+    dist = np.abs(a.astype(np.float64) - model).max(2)
+    thr = 14 + 26 * (gy / h) ** 2          # clouds gather at the horizon: be more forgiving lower down
+    sky = (dist < thr).astype(np.uint8)
+    # only sky that touches the top edge
+    n, lab = cv2.connectedComponents(sky)
+    keep = set(np.unique(lab[0:3, :])) - {0}
     m = np.isin(lab, list(keep)).astype(np.float32)
-    m = cv2.GaussianBlur(m, (0, 0), 1.0)
+    # stray specks (cloud fragments) that float free of the ground become sky
+    fgm = (1 - m).astype(np.uint8)
+    n2, lab2, stats, _ = cv2.connectedComponentsWithStats(fgm)
+    for i in range(1, n2):
+        x, y, cw, ch, area = stats[i]
+        if area < 600 and y + ch < h - 2: m[lab2 == i] = 1
+    # close hairline cracks inside the sky (jpeg noise), then feather
+    m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
+    m = cv2.GaussianBlur(m, (0, 0), 0.8)
     fg = np.dstack([a, ((1 - m) * 255).astype(np.uint8)])
     return im, Image.fromarray(fg, "RGBA")
 

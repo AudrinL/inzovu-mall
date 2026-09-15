@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="/assets/img/hero-alt-bg.webp" />
-  <link rel="preload" as="image" href="/assets/img/hero-alt-fg.webp" />
+  <link rel="preload" as="image" href="/assets/img/hero-main-bg.webp" media="(min-width: 901px)" />
+  <link rel="preload" as="image" href="/assets/img/hero-main-fg.webp" media="(min-width: 901px)" />
   <meta property="og:title" content="Inzovu Mall — Kigali, Rwanda" />
   <meta property="og:description" content="Much more than a mall. A destination on a hill. Opening Q1 2027." />
   <meta property="og:image" content="/assets/img/aerial.webp" />
@@ -85,9 +85,9 @@
     <!-- ── hero ─────────────────────────────────────────────── -->
     <section class="hero" id="hero" data-nav-light>
       <div class="hero__frame">
-        <div class="hero__layer hero__sky" data-depth="0.04"><picture><source media="(max-width: 900px)" srcset="/assets/img/hero-tall-bg.webp"><img src="/assets/img/hero-alt-bg.webp" alt="" fetchpriority="high" /></picture></div>
+        <div class="hero__layer hero__sky" data-depth="0.04"><picture><source media="(max-width: 900px)" srcset="/assets/img/hero-tall-bg.webp"><img src="/assets/img/hero-main-bg.webp" alt="" fetchpriority="high" /></picture></div>
         <div class="hero__layer hero__word t-display" data-depth="0.09"><span class="line-mask"><span class="line" id="hero-word">inzovu</span></span></div>
-        <div class="hero__layer hero__building" data-depth="0.02"><picture><source media="(max-width: 900px)" srcset="/assets/img/hero-tall-fg.webp"><img src="/assets/img/hero-alt-fg.webp" alt="Inzovu Mall — the mall, the Odalys hotel tower and the Kigali Ferris wheel at dusk" fetchpriority="high" /></picture></div>
+        <div class="hero__layer hero__building" data-depth="0.02"><picture><source media="(max-width: 900px)" srcset="/assets/img/hero-tall-fg.webp"><img src="/assets/img/hero-main-fg.webp" alt="Inzovu Mall — the retail podium with the hotel and office towers, seen from KN 5 Road" fetchpriority="high" /></picture></div>
       </div>
       <div class="hero__ui">
         <div class="hero__meta">
@@ -139,6 +139,7 @@
           <div class="approach__cap"><span class="t-label" data-i18n="ap.c3k">The neighbour</span><h2 class="t-h2" data-i18n="ap.c3">kigali convention centre</h2></div>
           <div class="approach__cap"><span class="t-label" data-i18n="ap.c4k">The landmark</span><h2 class="t-h2">inzovu mall</h2></div>
         </div>
+        <div class="approach__cue" id="approach-cue"><i></i><span data-i18n="ap.cue">keep scrolling to fly in</span></div>
         <div class="approach__progress"><i id="approach-progress"></i></div>
       </div>
     </section>
@@ -147,7 +148,7 @@
     <section class="zones section" id="zones">
       <div class="zones__head">
         <div><span class="t-label">02 — <span data-i18n="zones.eyebrow">The spaces</span></span><h2 class="t-h2" data-i18n="zones.title">one ribbon,<br>six worlds</h2></div>
-        <span class="t-label" data-i18n="zones.hint">click a space to enter</span>
+        <span class="t-label" data-i18n="zones.hint">click any space to enter it</span>
       </div>
       <svg class="zones__ribbon" id="zones-ribbon" preserveAspectRatio="none"><path id="zones-ribbon-path" d=""/></svg>
       <div class="zones__track" id="zones-track">
@@ -156,7 +157,7 @@
           <div class="zone-card__ui">
             <div class="zone-card__idx"><span>01 / 06</span><span data-i18n="z.shops.k">retail · duty free</span></div>
             <div class="zone-card__num t-num">9,000<small>m²</small></div>
-            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.shops.t">shops</h3><p class="zone-card__desc" data-i18n="z.shops.d">40 brands. VAT refund and Rwanda's first in-mall duty free.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.shops.t">shops</h3><p class="zone-card__desc" data-i18n="z.shops.d">40 brands. VAT refund and Rwanda's first in-mall duty free.</p></div><span class="zone-card__cta"><span data-i18n="z.enter">Enter</span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></span></div>
           </div>
         </article>
         <article class="zone-card" data-zone="business" data-cursor="enter">
@@ -164,7 +165,7 @@
           <div class="zone-card__ui">
             <div class="zone-card__idx"><span>02 / 06</span><span data-i18n="z.biz.k">offices · conferences</span></div>
             <div class="zone-card__num t-num">6,000<small>m²</small></div>
-            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.biz.t">business centre</h3><p class="zone-card__desc" data-i18n="z.biz.d">Office floors and a conference venue next door to the KCC.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.biz.t">business centre</h3><p class="zone-card__desc" data-i18n="z.biz.d">Office floors and a conference venue next door to the KCC.</p></div><span class="zone-card__cta"><span data-i18n="z.enter">Enter</span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></span></div>
           </div>
         </article>
         <article class="zone-card" data-zone="dining" data-cursor="enter">
@@ -172,7 +173,7 @@
           <div class="zone-card__ui">
             <div class="zone-card__idx"><span>03 / 06</span><span data-i18n="z.dine.k">restaurant · food court</span></div>
             <div class="zone-card__num t-num">1,635<small>m²</small></div>
-            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.dine.t">dining</h3><p class="zone-card__desc" data-i18n="z.dine.d">A restaurant, a food court, and a rooftop terrace facing the hills.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.dine.t">dining</h3><p class="zone-card__desc" data-i18n="z.dine.d">A restaurant, a food court, and a rooftop terrace facing the hills.</p></div><span class="zone-card__cta"><span data-i18n="z.enter">Enter</span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></span></div>
           </div>
         </article>
         <article class="zone-card" data-zone="leisure" data-cursor="enter">
@@ -180,7 +181,7 @@
           <div class="zone-card__ui">
             <div class="zone-card__idx"><span>04 / 06</span><span data-i18n="z.play.k">kids · gym · bowling · wheel</span></div>
             <div class="zone-card__num t-num">4,000<small>m²</small></div>
-            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.play.t">leisure</h3><p class="zone-card__desc" data-i18n="z.play.d">1,800 m² kids area, 700 m² gym, bowling — and the Kigali Ferris wheel.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.play.t">leisure</h3><p class="zone-card__desc" data-i18n="z.play.d">1,800 m² kids area, 700 m² gym, bowling — and the Kigali Ferris wheel.</p></div><span class="zone-card__cta"><span data-i18n="z.enter">Enter</span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></span></div>
           </div>
         </article>
         <article class="zone-card" data-zone="hotel" data-cursor="enter">
@@ -188,7 +189,7 @@
           <div class="zone-card__ui">
             <div class="zone-card__idx"><span>05 / 06</span><span data-i18n="z.hotel.k">5★ · odalys</span></div>
             <div class="zone-card__num t-num">95<small data-i18n="z.hotel.u">rooms</small></div>
-            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.hotel.t">inzovu hôtel</h3><p class="zone-card__desc" data-i18n="z.hotel.d">Five stars, a rooftop pool, and the Convention Centre dome for a view.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.hotel.t">inzovu hôtel</h3><p class="zone-card__desc" data-i18n="z.hotel.d">Five stars, a rooftop pool, and the Convention Centre dome for a view.</p></div><span class="zone-card__cta"><span data-i18n="z.enter">Enter</span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></span></div>
           </div>
         </article>
         <article class="zone-card" data-zone="access" data-cursor="enter">
@@ -196,18 +197,19 @@
           <div class="zone-card__ui">
             <div class="zone-card__idx"><span>06 / 06</span><span data-i18n="z.acc.k">parking · access</span></div>
             <div class="zone-card__num t-num">400<small data-i18n="z.acc.u">spaces</small></div>
-            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.acc.t">access</h3><p class="zone-card__desc" data-i18n="z.acc.d">400 parking spaces, KN 5 Road, 10 minutes from the airport road.</p></div><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></div>
+            <div class="zone-card__foot"><div><h3 class="zone-card__title t-display" data-i18n="z.acc.t">access</h3><p class="zone-card__desc" data-i18n="z.acc.d">400 parking spaces, KN 5 Road, 10 minutes from the airport road.</p></div><span class="zone-card__cta"><span data-i18n="z.enter">Enter</span><span class="pill__icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M5 3h8v8"/></svg></span></span></div>
           </div>
         </article>
       </div>
-      <div class="zones__hint" data-i18n="zones.scroll">scroll to travel the ribbon →</div>
+      <div class="zones__count"><span id="zones-idx">01</span><i id="zones-track-bar"></i><span>06</span></div>
+      <div class="zones__hint"><span><span data-i18n="zones.scroll">scroll down to travel</span><i></i></span><div class="zones__ctl"><button id="zones-prev" aria-label="Previous space"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L5 8l5 5"/></svg></button><button id="zones-next" aria-label="Next space"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3l5 5-5 5"/></svg></button></div></div>
     </section>
 
     <!-- ── stats — proportional ─────────────────────────────── -->
     <section class="stats section" id="stats">
       <div class="stats__head">
         <div><span class="t-label">03 — <span data-i18n="stats.eyebrow">The figures, to scale</span></span><div class="stats__total t-num"><span data-count="29000">0</span><small>m²</small></div></div>
-        <p class="t-body" data-i18n="stats.p">Every block below is drawn in proportion to the floor area it represents. Hover to see the space; the whole rectangle is the 29,000 m² of gross leasable area.</p>
+        <p class="t-body" data-i18n="stats.p">Every block below is drawn in proportion to the floor area it represents. Hover to see the space, click to enter it; the whole rectangle is the 29,000 m² of gross leasable area.</p>
       </div>
       <div class="treemap" id="treemap"></div>
       <div class="stats__note"><span class="t-label" data-i18n="stats.n1">Areas per developer figures · rounded</span><span class="t-label" data-i18n="stats.n2">+ 400 parking spaces, not to scale</span></div>
@@ -222,7 +224,7 @@
       <div class="compare" id="compare" data-cursor="drag">
         <img class="compare__before" src="/assets/img/site-1.webp" alt="Construction site, Kimihurura, 2024" loading="lazy">
         <img class="compare__after" src="/assets/img/aerial.webp" alt="Aerial render of Inzovu Mall" loading="lazy">
-        <div class="compare__handle"><b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></b></div>
+        <div class="compare__handle"><b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></b><span data-i18n="build.drag">drag to compare</span></div>
         <span class="compare__tag compare__tag--a" data-i18n="build.a">Q3 2023 · groundworks</span>
         <span class="compare__tag compare__tag--b" data-i18n="build.b">Q1 2027 · delivery</span>
       </div>
@@ -258,6 +260,7 @@
       <div>
         <span class="t-label">06 — <span data-i18n="af.eyebrow">Groupe Duval in Africa</span></span>
         <h2 class="t-h2" style="margin:12px 0 28px" data-i18n="af.title">six projects,<br>five countries</h2>
+        <span class="t-label africa__hint" data-i18n="af.hint">hover or tap a project to trace it back to kigali</span>
         <div class="africa__list" id="africa-list">
           <div class="africa__row" data-pin="sama"><span class="t-label">01</span><span class="name">Tour Sama</span><span class="t-body">Abidjan · CI</span><span class="t-body">6,000 m²</span><span class="t-label">2021</span></div>
           <div class="africa__row" data-pin="notrepere"><span class="t-label">02</span><span class="name">Village Notre Père</span><span class="t-body">Abidjan · CI</span><span class="t-body">23,000 m²</span><span class="t-label">2028</span></div>
@@ -341,7 +344,7 @@
     <div class="zone-view__media" id="zone-media"></div>
     <div class="zone-view__frame"></div>
     <div class="zone-view__dots" id="zone-dots"></div>
-    <div class="zone-view__side" id="zone-side">scroll · gallery</div>
+    <div class="zone-view__side" id="zone-side"><span data-i18n="zv.gallery">scroll for more images</span><i></i></div>
     <div class="zone-view__ui">
       <div class="zone-view__top">
         <span class="t-label" id="zone-idx">01 / 06</span>
