@@ -1,0 +1,65 @@
+# Shops – Inzovu Mall
+
+Source: en-commerces
+
+Shops – Inzovu Mall
+CONTACT
+- Français
+## SHOPPING & DUTY FREE : AN EXPERIENCE
+WITHOUT BORDERS
+Step inside Inzovu Mall for an amazing shopping experience.
+With 9,000 sqm of fl oor space, including 6,600 sqm allotted to retailers, the shopping centre will be home to 40 major brands, giving visitors an experience that is rich, varied and immersive.
+To make the visitor experience even more enjoyable, Inzovu Mall will also offer VAT refunds to international customers.
+Travellers with a foreign passport will be also able to make duty free purchases directly at several shops inside the mall. This is a brand-new initiative for Rwanda, the first of its kind in the country.
+### Previous
+Project
+### Next
+Business center
+## Would you like to be part of the adventure and reserve a space in this unique venue in Rwanda?
+Fill in this form and one of our experts will contact you as soon as possible.
+"
+*
+" indicates required fields
+Nom
+*
+Surname
+Name
+Company Name
+E-mail
+*
+Phone number
+*
+Message
+*
+Do you have a question for us?
+Phone
+This field is for validation purposes and should be left unchanged.
+## Ils nous ont fait confiance
+- Project
+- Shops
+- Business center
+- Dining
+- Leisure activities
+- Tourism residence
+- Plans
+- Access
+Nous utilisons des cookies pour vous garantir la meilleure expérience sur notre site web. Si vous continuez à utiliser ce site, nous supposerons que vous en êtes satisfait.
+OK
+Non
+
+---
+
+## Images used on this page
+- GeneralSans-Medium-1.ttf  (https://www.inzovumall.com/wp-content/uploads/2024/05/GeneralSans-Medium-1.ttf)
+- GeneralSans-Regular-1.ttf  (https://www.inzovumall.com/wp-content/uploads/2024/05/GeneralSans-Regular-1.ttf)
+- GeneralSans-Semibold.ttf  (https://www.inzovumall.com/wp-content/uploads/2024/05/GeneralSans-Semibold.ttf)
+- header-commerces.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/03/header-commerces.jpg)
+- 01.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/12/01.jpg)
+- 02.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/12/02.jpg)
+- 03.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/12/03.jpg)
+- 04.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/12/04.jpg)
+- 05.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/12/05.jpg)
+- 06.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/12/06.jpg)
+- 07.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/12/07.jpg)
+- 08.jpg  (https://www.inzovumall.com/wp-content/uploads/2025/12/08.jpg)
+- Logo-Inzovu.svg  (https://www.inzovumall.com/wp-content/uploads/2026/05/Logo-Inzovu.svg)
